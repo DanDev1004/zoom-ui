@@ -48,7 +48,7 @@ export default function RatingStars() {
                         className={`star fs-1 ${rating >= value ? 'selected' : ''}`}
                         onClick={() => handleSelect(value)}
                     >
-                        ★
+                        {rating >= value ? '⭐' : '★'}
                     </span>
                 ))}
             </div>

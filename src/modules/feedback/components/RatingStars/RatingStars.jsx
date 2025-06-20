@@ -29,12 +29,22 @@ const feedbackMap = {
     },
 };
 
-export default function RatingStars() {
+export default function RatingStars({ onSubmit }) {
     const [rating, setRating] = useState(0);
+    const [selectedTags, setSelectedTags] = useState([]);
 
     const handleSelect = (value) => {
         setRating(value);
+        setSelectedTags([]); // Reinicia tags al cambiar de puntuación
         console.log('⭐ Calificación seleccionada:', value);
+    };
+
+    const toggleTag = (tag) => {
+        setSelectedTags((prev) =>
+            prev.includes(tag)
+                ? prev.filter((t) => t !== tag)
+                : [...prev, tag]
+        );
     };
 
     return (
@@ -59,7 +69,11 @@ export default function RatingStars() {
 
                     <div className="mt-3 d-flex flex-wrap justify-content-center gap-3">
                         {feedbackMap[rating].tags?.map((tag) => (
-                            <span key={tag} className="badge rounded-pill bg-light text-dark p-3">
+                            <span
+                                key={tag}
+                                className={`badge rounded-pill tag p-3 ${selectedTags.includes(tag) ? 'selected' : ''}`}
+                                onClick={() => toggleTag(tag)}
+                            >
                                 {tag}
                             </span>
                         ))}
@@ -73,6 +87,19 @@ export default function RatingStars() {
                                 </div>
                             ))}
                         </div>
+                    )}
+
+                    {rating > 0 && (
+                        <>
+                            {/* ... otros contenidos */}
+
+                            <button
+                                className="btn btn-primary mt-4"
+                                onClick={() => onSubmit && onSubmit()}
+                            >
+                                Enviar
+                            </button>
+                        </>
                     )}
                 </>
             )}

@@ -49,15 +49,18 @@
 }
 
 .tag {
-    background-color: #e0e0e0;
+    background-color: #868585;
     border-radius: 2rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
 }
 
-.tag:hover {
-    background-color: #d0d0d0;
+.tag.selected {
+    background-color: #007bff;
+    color: white;
 }
 
 .images-container {
